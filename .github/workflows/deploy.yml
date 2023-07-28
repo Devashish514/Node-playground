@@ -1,0 +1,47 @@
+# name: Deploy App to AWS API-Gateway
+
+# on:
+#   push:
+#     branches:
+#       - blog-LY  # change branch name 
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: '18.x'  # Change this to the Node.js version your app requires
+
+#       - name: Install dependencies
+#         run: npm install
+
+#       - name: Testing App
+#         run: npm run test
+
+#       - name: Start app
+#         run: npm run start  
+
+#       - name: Deploy to AWS Lambda
+#         run: |
+#           # Replace 'YOUR_LAMBDA_FUNCTION_NAME' with your Lambda function name
+#           aws lambda update-function-code --function-name YOUR_LAMBDA_FUNCTION_NAME --zip-file fileb://./path/to/deployment-package.zip
+#         env:
+#           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           AWS_REGION: ap-south-1  # Change this to your desired AWS region
+
+#       - name: Deploy API Gateway
+#         run: |
+#           # Replace 'YOUR_API_GATEWAY_ID' with your API Gateway ID
+#           # Replace 'YOUR_API_STAGE' with your API Gateway stage name (e.g., 'prod','dev')
+#           aws apigateway create-deployment --rest-api-id YOUR_API_GATEWAY_ID --stage-name YOUR_API_STAGE
+#         env:
+#           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           AWS_REGION: us-east-1  # Change this to your desired AWS region
