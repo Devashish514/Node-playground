@@ -7,9 +7,12 @@ const { blogsInputValidation } = require("../validations/blogs.validation");
 const createBlog = async (req, res) => {
     try {
         let data = req.body;
+
         const { error } = blogsInputValidation(data);
         if (error) throw new CustomError(400, error.details[0].message);
+
         const findAuthor = await user.findById(data.author);
+
         if (isEmptyObject(findAuthor)) {
             throw new CustomError(404, "No Author Found");
         } else {
