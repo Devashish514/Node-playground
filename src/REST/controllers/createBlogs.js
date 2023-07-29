@@ -1,5 +1,5 @@
 const blogs = require("../models/blogs");
-const user = require("../models/user");
+const author = require("../models/author");
 const CustomError = require("../utils/errorHandling");
 const { isEmptyObject } = require("../utils/helperFunctions");
 const { blogsInputValidation } = require("../validations/blogs.validation");
@@ -11,12 +11,14 @@ const createBlog = async (req, res) => {
         const { error } = blogsInputValidation(data);
         if (error) throw new CustomError(400, error.details[0].message);
 
-        const findAuthor = await user.findById(data.author);
+        const findAuthor = await author.findById(data.author);
 
         if (isEmptyObject(findAuthor)) {
             throw new CustomError(404, "No Author Found");
         } else {
             const blog = await blogs.create(data);
+            findAuthor.blogs.push(blog);
+            await findAuthor.save();
             return res.status(201).send({ data: blog });
         }
 

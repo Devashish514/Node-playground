@@ -17,7 +17,7 @@ const blogSchema = new mongoose.Schema({
     author: {
         type: ObjectId,
         required: true,
-        ref: 'user'
+        ref: 'author'
     },
     isDeleted: {
         type: Boolean,

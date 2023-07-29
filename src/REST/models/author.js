@@ -2,7 +2,7 @@ const { object } = require('joi');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
-const userSchema = new mongoose.Schema({
+const authorSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: true
@@ -29,9 +29,9 @@ const userSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
-    likes: [{ type: ObjectId, ref: "blogs" }],
-    follows: [{ type: ObjectId, ref: "author" }]
+    follows: [{ type: ObjectId, ref: "author" }],
+    blogs: [{ type: ObjectId, ref: "blogs" }]
 
 }, { timestamps: true });
 
-module.exports = mongoose.model('user', userSchema);
+module.exports = mongoose.model('author', authorSchema);

@@ -1,4 +1,5 @@
 const user = require("../models/user");
+const author = require("../models/author");
 const { userRegistrationValidation } = require("../validations/user.validation");
 const CustomError = require("../utils/errorHandling");
 const { signToken, passwordHelper } = require("../utils/helperFunctions");
@@ -13,8 +14,12 @@ const register = async (req, res) => {
 
         //hashing password...
         data.password = await passwordHelper.encryptPassword(data.password, passwordConstants.saltRound);
-
-        const createUser = await user.create(data);
+        let createUser;
+        if (data.type === "Author") {
+            createUser = await author.create(data);
+        } else {
+            createUser = await user.create(data);
+        }
 
         // generate jwt ,as user gets logged In once registered..
         const token = signToken(
