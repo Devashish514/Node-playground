@@ -1,6 +1,4 @@
-const { likeBlog } = require("../controllers/likes");
-
-// const LikeNode = require("../models/likes");
+// Linked List class for Toggle Likes Functionality
 
 class LikeNode {
     constructor(element) {
@@ -52,6 +50,14 @@ class Likes {
         return arr;
     }
 
-}
+};
 
-module.exports = Likes;
+
+// Tree Data Structure for Comment Thread Functionality....
+
+
+
+
+module.exports = {
+    Likes
+};

@@ -12,7 +12,7 @@ const Likes = require("../utils/utilClass");
  * Insertion and Deletion in Linked List is O(1)
  */
 
-const likeBlog = async (req, res) => {
+const toggleLike = async (req, res) => {
     try {
         let { userId, blogId } = req.params;
 
@@ -36,7 +36,7 @@ const likeBlog = async (req, res) => {
             for (let i = 0; i < userLikeList.likes.length; i++) {
                 newLikeList.insertLikes(userLikeList.likes[i].toString());   // LikeNode{ element: head, next: LikeNode{ element: blog1, next: [LikeNode] } };
             };
-            
+
             // console.log("forLoop", newLikeList);
             // console.log('list', newLikeList.createList());
             // console.log(blogId);
@@ -66,5 +66,5 @@ const likeBlog = async (req, res) => {
 
 
 module.exports = {
-    likeBlog
+    toggleLike
 }
