@@ -16,7 +16,7 @@ class Likes {
     findLikes(item) {
         let currentNode = this.head;
         while (currentNode.element !== item) {
-            if (!currentNode.next instanceof LikeNode) {
+            if (!(currentNode.next instanceof LikeNode)) {
                 return { status: false, data: null };
             }
             currentNode = currentNode.next;
@@ -47,6 +47,7 @@ class Likes {
         const arr = [];
         while (currentNode.next !== null) {
             arr.push(currentNode.next.element);
+            currentNode = currentNode.next;
         }
         return arr;
     }

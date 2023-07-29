@@ -18,22 +18,29 @@ const likeBlog = async (req, res) => {
 
         // empty Linked List => LikeNode{ element: head, next: null };
         let newLikeList = new Likes();
-        console.log(newLikeList);
+        // console.log(newLikeList);
 
         const userLikeList = await user.findById(userId);
         console.log(userLikeList);
-        if (userLikeList.length === 0) {
+        if (userLikeList.likes.length === 0) {
 
             newLikeList.insertLikes(blogId);
+            // console.log(newLikeList);
+            // console.log(newLikeList.createList());
             const findUser = await user.findByIdAndUpdate(userId, { likes: newLikeList.createList() }, { new: true });
             const updateLikeCount = await blogs.findByIdAndUpdate(blogId, { $inc: { likesCount: 1 } }, { new: true });
             return res.status(200).send({ blogData: updateLikeCount, userData: findUser });
         }
         else {
 
-            for (let i = 0; i < userLikeList.length; i++) {
-                newLikeList.insertLikes(userLikeList[i]);   // LikeNode{ element: head, next: LikeNode{ element: blog1, next: [LikeNode] } };
+            for (let i = 0; i < userLikeList.likes.length; i++) {
+                newLikeList.insertLikes(userLikeList.likes[i].toString());   // LikeNode{ element: head, next: LikeNode{ element: blog1, next: [LikeNode] } };
             };
+            
+            // console.log("forLoop", newLikeList);
+            // console.log('list', newLikeList.createList());
+            // console.log(blogId);
+            // console.log("findLike", newLikeList.findLikes(blogId.toString()));
 
             // if blogId already present in List, remove it, else insert it.
             if (newLikeList.findLikes(blogId).status) {
