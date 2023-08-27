@@ -9,14 +9,14 @@ export const requestHandler = async (req: CutomRequest, res: Response) => {
         console.log(data);
 
         if (req.sender === "earth" && req.reciever === "mars") {
-            if (/^[0-9.]+$/.test(data)) {
+            if (/^[0-9. ]+$/.test(data)) {
                 return res.status(400).send({ status: false, msg: "Invalid Message Type" });
             }
             const result = translate2Numeric(data.toUpperCase());
             return res.status(200).send({ data: result });
         }
         else if (req.sender === "mars" && req.reciever === "earth") {
-            if (!/^[0-9.]+$/.test(data)) {
+            if (!/^[0-9. ]+$/.test(data)) {
                 return res.status(400).send({ status: false, msg: "Invalid Message Type" });
             }
             const result = translate2Text(data);
@@ -55,7 +55,7 @@ export function translate2Numeric(input: string) {
     for (let i = 0; i < n; i++) {
         // Checking for space
         if (input[i] == ' ') {
-            output = output + "0";
+            output = output + " ";
         }
         else {
             let inputCode = input[i].charCodeAt(0);
