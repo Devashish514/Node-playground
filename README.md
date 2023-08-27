@@ -29,7 +29,7 @@ The project aims to establish communication between Earth and Mars by translatin
 
 ### Tech Stack
 
-**Backend:** NodeJS, Express, TypesScript
+**Backend:** NodeJS, Express, TypeScript
 
 **Database:** Redis
 
