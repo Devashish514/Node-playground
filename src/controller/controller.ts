@@ -9,14 +9,14 @@ export const requestHandler = async (req: CutomRequest, res: Response) => {
         console.log(data);
 
         if (req.sender === "earth" && req.reciever === "mars") {
-            if (/^[0-9. !@#]+$/.test(data)) {
+            if (/^[0-9. !@#*]+$/.test(data)) {
                 return res.status(400).send({ status: false, msg: "Invalid Message Type" });
             }
             const result = translate2Numeric(data.toUpperCase());
             return res.status(200).send({ data: result });
         }
         else if (req.sender === "mars" && req.reciever === "earth") {
-            if (!/^[0-9. !@#]+$/.test(data)) {
+            if (!/^[0-9. !@#*]+$/.test(data)) {
                 return res.status(400).send({ status: false, msg: "Invalid Message Type" });
             }
             const result = translate2Text(data);
